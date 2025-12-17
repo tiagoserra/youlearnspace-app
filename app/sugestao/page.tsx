@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import ReCAPTCHA from 'react-google-recaptcha'
 import YouTubeLayout from '@/components/layout/YouTubeLayout'
 import { RootState } from '@/lib/redux/store'
+import { fetchWithCsrf } from '@/lib/fetch-with-csrf'
 import styles from './page.module.css'
 
 export default function SugestaoPage() {
@@ -38,9 +39,8 @@ export default function SugestaoPage() {
         throw new Error('Por favor, complete o reCAPTCHA')
       }
 
-      const response = await fetch('/api/sugestao', {
+      const response = await fetchWithCsrf('/api/sugestao', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           recaptchaToken

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
+import { logError } from '@/lib/logger'
 
 export async function GET(request: NextRequest) {
   try {
@@ -39,7 +40,7 @@ export async function GET(request: NextRequest) {
       cursos: history
     })
   } catch (error) {
-    console.error('Erro ao buscar histórico:', error)
+    logError('cursos/history', error)
     return NextResponse.json(
       { error: 'Erro ao buscar histórico' },
       { status: 500 }

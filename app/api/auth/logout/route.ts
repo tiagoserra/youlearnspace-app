@@ -1,8 +1,13 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { clearAuthCookie } from '@/lib/auth'
+import { csrfProtection } from '@/lib/csrf'
+import { logError } from '@/lib/logger'
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   try {
+
+    const csrfError = csrfProtection(request)
+    if (csrfError) return csrfError
 
     await clearAuthCookie()
 
@@ -14,7 +19,7 @@ export async function POST() {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Erro ao fazer logout:', error)
+    logError('auth/logout', error)
     return NextResponse.json(
       { error: 'Erro ao processar logout' },
       { status: 500 }

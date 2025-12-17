@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
-import { generateToken, setAuthCookie } from '@/lib/auth'
+import { generateToken, generateRefreshToken, setAuthCookie, setRefreshCookie } from '@/lib/auth'
 import { verifyRecaptcha } from '@/lib/recaptcha'
+import { logError } from '@/lib/logger'
+import { applyRateLimit } from '@/lib/rate-limit'
 
 export async function POST(request: NextRequest) {
   try {
+    const rateLimitError = applyRateLimit(request, 'login')
+    if (rateLimitError) return rateLimitError
+
     const { email, senha, recaptchaToken } = await request.json()
 
     if (!email || !senha) {
@@ -49,11 +54,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const token = generateToken({
+    const payload = {
       userId: usuario.id,
       email: usuario.email,
       nome: usuario.nome
-    })
+    }
+
+    const token = generateToken(payload)
+    const refreshToken = generateRefreshToken(payload)
 
     const response = NextResponse.json(
       {
@@ -71,18 +79,18 @@ export async function POST(request: NextRequest) {
     )
 
     await setAuthCookie(response, token)
+    await setRefreshCookie(refreshToken)
 
-    // Setar cookie de locale
     response.cookies.set('NEXT_LOCALE', usuario.locale, {
-      httpOnly: false, // Precisa ser acessível no cliente
-      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      secure: true,
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 365 // 1 ano
+      maxAge: 60 * 60 * 24 * 365
     })
 
     return response
   } catch (error) {
-    console.error('Erro ao fazer login:', error)
+    logError('auth/login', error)
     return NextResponse.json(
       { error: 'Erro ao processar login. Tente novamente mais tarde.' },
       { status: 500 }

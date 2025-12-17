@@ -2,9 +2,15 @@ import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
 import { verifyRecaptcha } from '@/lib/recaptcha'
+import { generateToken, generateRefreshToken, setAuthCookie, setRefreshCookie } from '@/lib/auth'
+import { logError } from '@/lib/logger'
+import { applyRateLimit } from '@/lib/rate-limit'
 
 export async function POST(request: NextRequest) {
   try {
+    const rateLimitError = applyRateLimit(request, 'register')
+    if (rateLimitError) return rateLimitError
+
     const { nome, email, senha, confirmarSenha, recaptchaToken, locale } = await request.json()
 
     if (!nome || !email || !senha || !confirmarSenha) {
@@ -14,7 +20,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validar e definir locale
     const allowedLocales = ['pt-BR', 'en-US', 'es-ES']
     const userLocale = locale && allowedLocales.includes(locale) ? locale : 'pt-BR'
 
@@ -40,17 +45,31 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+    const emailRegex = /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/
+    const trimmedEmail = email.trim().toLowerCase()
+
+    if (!emailRegex.test(trimmedEmail) || trimmedEmail.length > 254) {
       return NextResponse.json(
         { error: 'Email inválido' },
         { status: 400 }
       )
     }
 
-    if (senha.length < 8 || senha.length > 50) {
+    if (senha.length < 12 || senha.length > 50) {
       return NextResponse.json(
-        { error: 'Senha deve ter entre 8 e 50 caracteres' },
+        { error: 'Senha deve ter entre 12 e 50 caracteres' },
+        { status: 400 }
+      )
+    }
+
+    const hasUppercase = /[A-Z]/.test(senha)
+    const hasLowercase = /[a-z]/.test(senha)
+    const hasNumber = /[0-9]/.test(senha)
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(senha)
+
+    if (!hasUppercase || !hasLowercase || !hasNumber || !hasSpecialChar) {
+      return NextResponse.json(
+        { error: 'Senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais' },
         { status: 400 }
       )
     }
@@ -91,6 +110,15 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    const payload = {
+      userId: novoUsuario.id,
+      email: novoUsuario.email,
+      nome: novoUsuario.nome
+    }
+
+    const token = generateToken(payload)
+    const refreshToken = generateRefreshToken(payload)
+
     const response = NextResponse.json(
       {
         success: true,
@@ -104,17 +132,19 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     )
 
-    // Setar cookie de locale
+    await setAuthCookie(response, token)
+    await setRefreshCookie(refreshToken)
+
     response.cookies.set('NEXT_LOCALE', userLocale, {
-      httpOnly: false, // Precisa ser acessível no cliente
-      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      secure: true,
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 365 // 1 ano
+      maxAge: 60 * 60 * 24 * 365
     })
 
     return response
   } catch (error) {
-    console.error('Erro ao cadastrar usuário:', error)
+    logError('auth/register', error)
     return NextResponse.json(
       { error: 'Erro ao processar cadastro. Tente novamente mais tarde.' },
       { status: 500 }

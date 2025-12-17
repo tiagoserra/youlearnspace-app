@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import { Curso } from '@/lib/types'
 import { getCursoIdFromSlug } from '@/lib/utils'
 import { useAppSelector } from '@/lib/redux/hooks'
+import { fetchWithCsrf } from '@/lib/fetch-with-csrf'
 import YouTubeLayout from '@/components/layout/YouTubeLayout'
 import LikeButton from '@/components/course/LikeButton'
 import CompleteButton from '@/components/course/CompleteButton'
@@ -173,7 +174,7 @@ export default function CursoClient({ curso }: CursoClientProps) {
 
     progressIntervalRef.current = setInterval(() => {
       saveProgress()
-    }, 10000) // 10 seconds
+    }, 10000)
   }
 
   const stopProgressTracking = () => {
@@ -192,10 +193,8 @@ export default function CursoClient({ curso }: CursoClientProps) {
 
       if (isNaN(currentTime) || !duration || isNaN(duration) || duration <= 0) return
 
-      await fetch(`/api/cursos/${curso.slug}/progress`, {
+      await fetchWithCsrf(`/api/cursos/${curso.slug}/progress`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ currentTime, duration })
       })
     } catch (error) {
@@ -207,9 +206,8 @@ export default function CursoClient({ curso }: CursoClientProps) {
     if (!isAuthenticated) return
 
     try {
-      const response = await fetch(`/api/cursos/${curso.slug}/complete`, {
-        method: 'POST',
-        credentials: 'include'
+      const response = await fetchWithCsrf(`/api/cursos/${curso.slug}/complete`, {
+        method: 'POST'
       })
 
       if (response.ok) {

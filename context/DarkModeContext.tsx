@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { DarkModeContextType } from '@/lib/types'
 import { useAppSelector } from '@/lib/redux/hooks'
+import { fetchWithCsrf } from '@/lib/fetch-with-csrf'
 
 const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined)
 
@@ -50,10 +51,8 @@ export function DarkModeProvider({ children }: { children: ReactNode }) {
     if (isAuthenticated) {
 
       try {
-        await fetch('/api/auth/theme', {
+        await fetchWithCsrf('/api/auth/theme', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
           body: JSON.stringify({ theme: newMode ? 'dark' : 'light' })
         })
       } catch (error) {

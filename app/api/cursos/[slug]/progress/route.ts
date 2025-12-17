@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
+import { csrfProtection } from '@/lib/csrf'
+import { logError } from '@/lib/logger'
 
 interface ProgressData {
   currentTime: number
@@ -13,6 +15,9 @@ export async function POST(
   context: { params: Promise<{ slug: string }> }
 ) {
   try {
+
+    const csrfError = csrfProtection(request)
+    if (csrfError) return csrfError
 
     const user = await getCurrentUser()
     if (!user) {
@@ -83,7 +88,7 @@ export async function POST(
       progress: progressData
     })
   } catch (error) {
-    console.error('Erro ao salvar progresso:', error)
+    logError('cursos/progress', error)
     return NextResponse.json(
       { error: 'Erro ao salvar progresso' },
       { status: 500 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Check } from 'lucide-react'
 import { CompleteButtonProps } from '@/lib/types'
 import { useAppSelector } from '@/lib/redux/hooks'
+import { fetchWithCsrf } from '@/lib/fetch-with-csrf'
 import styles from './CompleteButton.module.css'
 
 export default function CompleteButton({ cursoId, initialStatus }: CompleteButtonProps) {
@@ -25,9 +26,8 @@ export default function CompleteButton({ cursoId, initialStatus }: CompleteButto
     setIsLoading(true)
 
     try {
-      const response = await fetch(`/api/cursos/${slug}/complete`, {
-        method: 'POST',
-        credentials: 'include'
+      const response = await fetchWithCsrf(`/api/cursos/${slug}/complete`, {
+        method: 'POST'
       })
 
       if (response.ok) {

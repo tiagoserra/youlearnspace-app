@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
+import { logError } from '@/lib/logger'
 
 export async function POST(
   request: NextRequest,
@@ -65,7 +66,7 @@ export async function POST(
       })
     }
   } catch (error) {
-    console.error('Erro ao marcar início:', error)
+    logError('cursos/start', error)
     return NextResponse.json(
       { error: 'Erro ao marcar início' },
       { status: 500 }

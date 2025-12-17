@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getAuthTokenFromRequest, verifyToken } from '@/lib/auth'
+import { csrfProtection } from '@/lib/csrf'
+import { validateTitle, validateDescription, validateYouTubeUrl, validateCategory } from '@/lib/validation'
+import { logError, logWarn } from '@/lib/logger'
+import { applyRateLimit } from '@/lib/rate-limit'
 
 async function verifyRecaptcha(token: string): Promise<boolean> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY
 
   if (!secretKey) {
-    console.error('RECAPTCHA_SECRET_KEY não está configurado')
+    logWarn('sugestao/recaptcha', 'RECAPTCHA_SECRET_KEY não está configurado')
     return false
   }
 
@@ -20,13 +24,18 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
     const data = await response.json()
     return data.success === true
   } catch (error) {
-    console.error('Erro ao verificar reCAPTCHA:', error)
+    logError('sugestao/recaptcha', error)
     return false
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
+    const rateLimitError = applyRateLimit(request, 'sugestao')
+    if (rateLimitError) return rateLimitError
+
+    const csrfError = csrfProtection(request)
+    if (csrfError) return csrfError
 
     const token = getAuthTokenFromRequest(request)
     if (!token) {
@@ -46,9 +55,34 @@ export async function POST(request: NextRequest) {
 
     const data = await request.json()
 
-    if (!data.tituloSugestao || !data.urlCurso || !data.categoria || !data.descricao) {
+    const tituloValidation = validateTitle(data.tituloSugestao, 'Título da sugestão')
+    if (!tituloValidation.valid) {
       return NextResponse.json(
-        { error: 'Campos obrigatórios faltando' },
+        { error: tituloValidation.error },
+        { status: 400 }
+      )
+    }
+
+    const urlValidation = validateYouTubeUrl(data.urlCurso)
+    if (!urlValidation.valid) {
+      return NextResponse.json(
+        { error: urlValidation.error },
+        { status: 400 }
+      )
+    }
+
+    const categoriaValidation = validateCategory(data.categoria)
+    if (!categoriaValidation.valid) {
+      return NextResponse.json(
+        { error: categoriaValidation.error },
+        { status: 400 }
+      )
+    }
+
+    const descricaoValidation = validateDescription(data.descricao, 'Descrição', 1000)
+    if (!descricaoValidation.valid) {
+      return NextResponse.json(
+        { error: descricaoValidation.error },
         { status: 400 }
       )
     }
@@ -68,25 +102,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/
-    if (!youtubeRegex.test(data.urlCurso)) {
-      return NextResponse.json(
-        { error: 'URL do YouTube inválida' },
-        { status: 400 }
-      )
-    }
-
     const sugestao = await prisma.sugestao.create({
       data: {
         usuarioId: user.userId,
-        tituloSugestao: data.tituloSugestao.trim(),
+        tituloSugestao: tituloValidation.sanitized,
         urlCurso: data.urlCurso.trim(),
         categoria: data.categoria,
-        descricao: data.descricao.trim()
+        descricao: descricaoValidation.sanitized
       }
     })
-
-    console.log('Sugestão salva no banco:', sugestao.id)
 
     return NextResponse.json(
       {
@@ -97,7 +121,7 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     )
   } catch (error) {
-    console.error('Erro ao processar sugestão:', error)
+    logError('sugestao/POST', error)
     return NextResponse.json(
       { error: 'Erro ao processar sugestão. Tente novamente mais tarde.' },
       { status: 500 }
@@ -105,8 +129,24 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const token = getAuthTokenFromRequest(request)
+    if (!token) {
+      return NextResponse.json(
+        { error: 'Não autenticado' },
+        { status: 401 }
+      )
+    }
+
+    const user = verifyToken(token)
+    if (!user) {
+      return NextResponse.json(
+        { error: 'Token inválido ou expirado' },
+        { status: 401 }
+      )
+    }
+
     const sugestoes = await prisma.sugestao.findMany({
       orderBy: {
         createdAt: 'desc'
@@ -115,7 +155,7 @@ export async function GET() {
 
     return NextResponse.json({ sugestoes }, { status: 200 })
   } catch (error) {
-    console.error('Erro ao buscar sugestões:', error)
+    logError('sugestao/GET', error)
     return NextResponse.json(
       { error: 'Erro ao buscar sugestões' },
       { status: 500 }

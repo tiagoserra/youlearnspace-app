@@ -5,6 +5,7 @@ import { AlertCircle, X, Loader2 } from 'lucide-react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useAppSelector } from '@/lib/redux/hooks'
 import { useToast } from '@/context/ToastContext'
+import { fetchWithCsrf } from '@/lib/fetch-with-csrf'
 import styles from './RelatarProblema.module.css'
 
 interface RelatarProblemaProps {
@@ -76,12 +77,8 @@ export default function RelatarProblema({ cursoId, cursoSlug, cursoTitulo }: Rel
     setIsSubmitting(true)
 
     try {
-      const response = await fetch(`/api/cursos/${cursoSlug}/problema`, {
+      const response = await fetchWithCsrf(`/api/cursos/${cursoSlug}/problema`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
         body: JSON.stringify({
           cursoId,
           descricao: descricao.trim(),

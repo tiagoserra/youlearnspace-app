@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { fetchWithCsrf, clearCsrfToken } from '@/lib/fetch-with-csrf'
 
 export interface User {
   id: string
@@ -46,10 +47,10 @@ export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
+      await fetchWithCsrf('/api/auth/logout', {
+        method: 'POST'
       })
+      clearCsrfToken()
       return null
     } catch (error) {
       return rejectWithValue('Erro ao fazer logout')

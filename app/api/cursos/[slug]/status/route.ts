@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
+import { logError } from '@/lib/logger'
 
 export async function GET(
   request: NextRequest,
@@ -51,7 +52,7 @@ export async function GET(
       lastAccessedAt: record.lastAccessedAt
     })
   } catch (error) {
-    console.error('Erro ao buscar status:', error)
+    logError('cursos/status', error)
     return NextResponse.json(
       { error: 'Erro ao buscar status' },
       { status: 500 }

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { logError } from '@/lib/logger'
 
 export async function GET() {
   try {
@@ -44,7 +45,7 @@ export async function GET() {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Erro ao obter usuário:', error)
+    logError('auth/me', error)
     return NextResponse.json(
       { error: 'Erro ao obter informações do usuário' },
       { status: 500 }

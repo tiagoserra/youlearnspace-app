@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getAuthTokenFromRequest, verifyToken } from '@/lib/auth'
+import { csrfProtection } from '@/lib/csrf'
+import { validateDescription } from '@/lib/validation'
+import { logError, logWarn, logInfo } from '@/lib/logger'
+import { applyRateLimit } from '@/lib/rate-limit'
 
 async function verifyRecaptcha(token: string): Promise<boolean> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY
 
   if (!secretKey) {
-    console.error('RECAPTCHA_SECRET_KEY não está configurado')
+    logWarn('problema/recaptcha', 'RECAPTCHA_SECRET_KEY não está configurado')
     return false
   }
 
@@ -20,7 +24,7 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
     const data = await response.json()
     return data.success === true
   } catch (error) {
-    console.error('Erro ao verificar reCAPTCHA:', error)
+    logError('problema/recaptcha', error)
     return false
   }
 }
@@ -30,6 +34,11 @@ export async function POST(
   context: { params: Promise<{ slug: string }> }
 ) {
   try {
+    const rateLimitError = applyRateLimit(request, 'problema')
+    if (rateLimitError) return rateLimitError
+
+    const csrfError = csrfProtection(request)
+    if (csrfError) return csrfError
 
     const token = getAuthTokenFromRequest(request)
     if (!token) {
@@ -60,19 +69,14 @@ export async function POST(
       )
     }
 
-    if (!descricao || !descricao.trim()) {
+    const descricaoValidation = validateDescription(descricao, 'Descrição do problema', 512)
+    if (!descricaoValidation.valid) {
       return NextResponse.json(
-        { error: 'Descrição é obrigatória' },
+        { error: descricaoValidation.error },
         { status: 400 }
       )
     }
-
-    if (descricao.length > 512) {
-      return NextResponse.json(
-        { error: 'Descrição não pode ter mais de 512 caracteres' },
-        { status: 400 }
-      )
-    }
+    const sanitizedDescricao = descricaoValidation.sanitized
 
     if (!recaptchaToken) {
       return NextResponse.json(
@@ -93,11 +97,11 @@ export async function POST(
       data: {
         usuarioId: user.userId,
         cursoId,
-        descricao: descricao.trim()
+        descricao: sanitizedDescricao
       }
     })
 
-    console.log('Problema reportado:', problema.id, 'Curso ID:', cursoId, 'Slug:', slug, 'Usuário:', user.userId)
+    logInfo('problema/POST', `Problema reportado: ${problema.id}, Curso: ${cursoId}, Slug: ${slug}`)
 
     return NextResponse.json(
       {
@@ -108,7 +112,7 @@ export async function POST(
       { status: 201 }
     )
   } catch (error) {
-    console.error('Erro ao reportar problema:', error)
+    logError('problema/POST', error)
     return NextResponse.json(
       { error: 'Erro ao processar solicitação. Tente novamente mais tarde.' },
       { status: 500 }

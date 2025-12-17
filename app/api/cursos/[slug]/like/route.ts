@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
+import { csrfProtection } from '@/lib/csrf'
+import { logError } from '@/lib/logger'
 
 export async function POST(
   request: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) {
   try {
+
+    const csrfError = csrfProtection(request)
+    if (csrfError) return csrfError
 
     const user = await getCurrentUser()
     if (!user) {
@@ -63,7 +68,7 @@ export async function POST(
       })
     }
   } catch (error) {
-    console.error('Erro ao alternar like:', error)
+    logError('cursos/like', error)
     return NextResponse.json(
       { error: 'Erro ao alternar like' },
       { status: 500 }

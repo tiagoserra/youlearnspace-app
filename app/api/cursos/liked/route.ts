@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
+import { logError } from '@/lib/logger'
 
 export async function GET(request: NextRequest) {
   try {
@@ -35,7 +36,7 @@ export async function GET(request: NextRequest) {
       cursos: likedCursos
     })
   } catch (error) {
-    console.error('Erro ao buscar cursos curtidos:', error)
+    logError('cursos/liked', error)
     return NextResponse.json(
       { error: 'Erro ao buscar cursos curtidos' },
       { status: 500 }

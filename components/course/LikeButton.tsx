@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Heart } from 'lucide-react'
 import { LikeButtonProps } from '@/lib/types'
 import { useAppSelector } from '@/lib/redux/hooks'
+import { fetchWithCsrf } from '@/lib/fetch-with-csrf'
 import styles from './LikeButton.module.css'
 
 export default function LikeButton({ cursoId, initialLiked }: LikeButtonProps) {
@@ -26,9 +27,8 @@ export default function LikeButton({ cursoId, initialLiked }: LikeButtonProps) {
     setIsAnimating(true)
 
     try {
-      const response = await fetch(`/api/cursos/${slug}/like`, {
-        method: 'POST',
-        credentials: 'include'
+      const response = await fetchWithCsrf(`/api/cursos/${slug}/like`, {
+        method: 'POST'
       })
 
       if (response.ok) {

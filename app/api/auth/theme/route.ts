@@ -1,9 +1,15 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { csrfProtection } from '@/lib/csrf'
+import { logError } from '@/lib/logger'
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
+
+    const csrfError = csrfProtection(request)
+    if (csrfError) return csrfError
+
     const user = await getCurrentUser()
 
     if (!user) {
@@ -33,7 +39,7 @@ export async function POST(request: Request) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Erro ao atualizar tema:', error)
+    logError('auth/theme', error)
     return NextResponse.json(
       { error: 'Erro ao atualizar tema' },
       { status: 500 }

@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useAppSelector, useAppDispatch } from '@/lib/redux/hooks'
 import { setUser } from '@/lib/redux/slices/authSlice'
 import { useToast } from '@/context/ToastContext'
+import { fetchWithCsrf } from '@/lib/fetch-with-csrf'
 import styles from './LocaleSelector.module.css'
 
 const LOCALES = [
@@ -30,20 +31,14 @@ export default function LocaleSelector() {
     setIsSaving(true)
 
     try {
-      const response = await fetch('/api/auth/locale', {
+      const response = await fetchWithCsrf('/api/auth/locale', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ locale: selectedLocale })
       })
 
       if (response.ok) {
-        // Atualizar Redux
         dispatch(setUser({ ...user, locale: selectedLocale }))
-
         showToast(t('localeSaved'), 'success')
-
-        // Atualizar a página para aplicar novo idioma sem resetar o estado do Redux
         setTimeout(() => {
           router.refresh()
         }, 1000)
