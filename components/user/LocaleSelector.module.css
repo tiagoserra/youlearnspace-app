@@ -1,0 +1,75 @@
+.localeSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.localeSelector label {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectWrapper select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.selectWrapper select:hover:not(:disabled) {
+  border-color: var(--accent-color);
+}
+
+.selectWrapper select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+}
+
+.selectWrapper select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selectWrapper select option {
+  padding: 8px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.saveButton {
+  align-self: flex-start;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #cc0000;
+}
+
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.saveButton:active:not(:disabled) {
+  transform: scale(0.98);
+}

@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Sugestao {
+  id              String   @id @default(cuid())
+  usuarioId       String
+  tituloSugestao  String
+  urlCurso        String
+  categoria       String
+  descricao       String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relacionamento
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId])
+  @@map("sugestoes")
+}
+
+model Usuario {
+  id              String           @id @default(cuid())
+  nome            String
+  email           String           @unique
+  senha           String           // Hash bcrypt
+  theme           String           @default("system") // Tema: 'light', 'dark', 'system'
+  locale          String           @default("pt-BR") // Idioma: 'pt-BR', 'en-US', 'es-ES'
+  cursos          UsuarioCurso[]   // Relacionamento com cursos
+  sugestoes       Sugestao[]       // Relacionamento com sugestões
+  cursoProblemas  CursoProblema[]  // Relacionamento com problemas reportados
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@map("usuarios")
+}
+
+model UsuarioCurso {
+  id              String    @id @default(cuid())
+  usuarioId       String
+  cursoSlug       String
+
+  // Estados
+  liked           Boolean   @default(false)
+  completed       Boolean   @default(false)
+  inProgress      Boolean   @default(false)
+
+  // Timestamps
+  likedAt         DateTime?
+  completedAt     DateTime?
+  startedAt       DateTime?
+  lastAccessedAt  DateTime?
+
+  // Progresso de vídeo (JSON: { currentTime, duration, lastUpdated })
+  videoProgress   Json?
+
+  // Relacionamento
+  usuario         Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([usuarioId, cursoSlug])
+  @@index([usuarioId])
+  @@index([cursoSlug])
+  @@map("usuario_cursos")
+}
+
+model CursoProblema {
+  id          String   @id @default(cuid())
+  usuarioId   String
+  cursoId     String   // ID do YouTube (ex: "6o0bGfXTsro")
+  descricao   String   @db.VarChar(512)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relacionamento
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId])
+  @@index([cursoId])
+  @@map("curso_problemas")
+}

@@ -1,0 +1,172 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 100;
+}
+
+.left, .right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.menuButton, .iconButton {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+
+.menuButton:hover, .iconButton:hover {
+  background-color: var(--bg-hover);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  gap: 0;
+  text-decoration: none;
+}
+
+.logoYou {
+  color: #FF0000;
+}
+
+.logoLearn {
+  color: #0066FF;
+}
+
+.logoSpace {
+  color: #FFD700;
+}
+
+.searchContainer {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBox {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 80px 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+  border-color: var(--accent-color);
+}
+
+.searchInput::placeholder {
+  color: var(--text-secondary);
+}
+
+.clearButton, .searchButton {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+
+.clearButton {
+  right: 40px;
+}
+
+.clearButton:hover, .searchButton:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Mobile Search Modal */
+.mobileSearchModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-secondary);
+  z-index: 101;
+  animation: slideInRight 0.3s ease;
+}
+
+.mobileSearchHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobileSearchInput {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background-color: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+}
+
+.mobileSearchInput::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+.hideMobile {
+  display: flex;
+}
+
+.hideDesktop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .hideMobile {
+    display: none;
+  }
+
+  .hideDesktop {
+    display: flex;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+}

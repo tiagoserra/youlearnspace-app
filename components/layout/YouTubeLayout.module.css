@@ -1,0 +1,28 @@
+.container {
+  min-height: 100vh;
+}
+
+.layout {
+  position: relative;
+  padding-top: var(--header-height);
+}
+
+.main {
+  padding: 24px;
+  min-height: calc(100vh - var(--header-height));
+  transition: margin-left var(--transition-smooth);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 89;
+  animation: fadeIn 0.2s ease;
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 16px;
+  }
+}

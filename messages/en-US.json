@@ -1,0 +1,209 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "submit": "Submit",
+    "submitting": "Submitting..."
+  },
+  "auth": {
+    "login": "Sign In",
+    "loginTitle": "Sign In",
+    "loginDescription": "Sign in to access your account",
+    "register": "Sign Up",
+    "registerTitle": "Create Account",
+    "registerDescription": "Fill in the fields below to register",
+    "logout": "Sign Out",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "Your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter password again",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "passwordMin": "Minimum 8 characters",
+    "passwordMismatch": "Passwords do not match",
+    "recaptchaRequired": "Please complete the reCAPTCHA",
+    "loginError": "Error signing in",
+    "registerError": "Error signing up",
+    "registerSuccess": "Registration successful! Redirecting to login...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Sign in",
+    "registerLink": "Sign up",
+    "language": "Language"
+  },
+  "nav": {
+    "home": "Home",
+    "history": "History",
+    "liked": "Liked Courses",
+    "about": "About",
+    "suggest": "Suggest Course",
+    "profile": "Profile",
+    "search": "Search courses...",
+    "userMenu": "User menu",
+    "hello": "Hello, {name}"
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
+  },
+  "course": {
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "like": "Like",
+    "liked": "Liked",
+    "likeCourse": "Like course",
+    "unlikeCourse": "Unlike course",
+    "loginToLike": "Sign in to like this course",
+    "reportProblem": "Report Problem",
+    "reportProblemTitle": "Report Problem",
+    "reportProblemDescription": "Please describe the problem.",
+    "reportProblemPlaceholder": "Describe the problem found in this course in detail...",
+    "reportProblemSuccess": "Problem reported successfully! Thank you for your feedback.",
+    "reportProblemError": "Error submitting problem",
+    "recaptchaNotConfigured": "Configuration error: reCAPTCHA not configured.",
+    "descriptionMaxLength": "Description cannot exceed {max} characters.",
+    "characterCount": "{count} / {max}"
+  },
+  "home": {
+    "noCoursesFound": "No courses found",
+    "noCoursesWithSearch": "No courses found with the term \"{query}\"",
+    "noCoursesInCategory": "No courses in category \"{category}\""
+  },
+  "about": {
+    "title": "About YouLearnSpace",
+    "slogan": "Be the Protagonist of Your Future",
+    "missionTitle": "Our Mission",
+    "missionText": "Democratize access to quality education through curated free YouTube courses...",
+    "howItWorksTitle": "How It Works",
+    "step1Title": "Explore",
+    "step1Description": "Browse our curated collection...",
+    "step2Title": "Choose",
+    "step2Description": "Find the perfect course...",
+    "step3Title": "Learn",
+    "step3Description": "Watch courses for free...",
+    "step4Title": "Share",
+    "step4Description": "Found an amazing course?...",
+    "whyTitle": "Why YouLearnSpace?",
+    "feature1Title": "100% Free:",
+    "feature1Text": "All courses are completely free...",
+    "feature2Title": "Expert Curation:",
+    "feature2Text": "We select only the best courses...",
+    "feature3Title": "Learn at Your Pace:",
+    "feature3Text": "Study when and where you want...",
+    "feature4Title": "Collaborative Community:",
+    "feature4Text": "Suggest new courses...",
+    "whatWeOfferTitle": "What We Offer",
+    "offer1": "Programming and Development Courses",
+    "offer2": "Technology and Innovation",
+    "offer3": "Design and Creativity",
+    "offer4": "Business and Entrepreneurship",
+    "offer5": "And much more..."
+  },
+  "suggest": {
+    "title": "Suggest a Course",
+    "subtitle": "Know an amazing free course? Share it with us!",
+    "loginRequired": "You must be logged in to suggest a course.",
+    "loginButton": "Sign In",
+    "success": "Suggestion submitted successfully! Thank you for your contribution.",
+    "courseTitle": "Course Title",
+    "youtubeUrl": "YouTube URL",
+    "youtubeUrlPlaceholder": "https://www.youtube.com/watch?v=...",
+    "category": "Category",
+    "categoryPlaceholder": "Select...",
+    "description": "Description ({min}-{max} characters)",
+    "descriptionPlaceholder": "Describe the course in detail, including what is taught, target audience, and why you recommend it...",
+    "categories": {
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "mobile": "Mobile",
+      "dataScience": "Data Science",
+      "devops": "DevOps",
+      "design": "Design",
+      "softSkills": "Soft Skills"
+    }
+  },
+  "liked": {
+    "title": "Liked Courses",
+    "empty": "You haven't liked any courses yet",
+    "emptyDescription": "Explore our library and mark your favorite courses!",
+    "exploreCourses": "Explore Courses"
+  },
+  "history": {
+    "title": "Course History",
+    "empty": "You haven't accessed any courses yet",
+    "emptyDescription": "Start your learning journey now!",
+    "exploreCourses": "Explore Courses"
+  },
+  "profile": {
+    "title": "My Profile",
+    "accountInfo": "Account Information",
+    "name": "Name",
+    "email": "Email",
+    "preferences": "Preferences",
+    "language": "Language",
+    "save": "Save",
+    "saving": "Saving...",
+    "loading": "Loading...",
+    "localeSaved": "Language updated successfully!",
+    "localeError": "Error updating language"
+  },
+  "categories": {
+    "all": "All",
+    "frontend": "Front-end",
+    "backend": "Back-end",
+    "mobile": "Mobile",
+    "dataScience": "Data Science",
+    "devops": "DevOps",
+    "design": "Design",
+    "softSkills": "Soft Skills"
+  },
+  "levels": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "api": {
+    "register": {
+      "allFieldsRequired": "All fields are required",
+      "emailInvalid": "Invalid email",
+      "passwordMin": "Password must be between 8 and 50 characters",
+      "passwordMismatch": "Passwords do not match",
+      "emailAlreadyExists": "Email already registered",
+      "recaptchaRequired": "Please complete the reCAPTCHA",
+      "recaptchaFailed": "reCAPTCHA validation failed",
+      "nameLength": "Name must be between 3 and 100 characters",
+      "error": "Error processing registration. Please try again later.",
+      "success": "Registration successful!"
+    },
+    "login": {
+      "fieldsRequired": "Email and password are required",
+      "invalidCredentials": "Invalid email or password",
+      "recaptchaRequired": "Please complete the reCAPTCHA",
+      "recaptchaFailed": "reCAPTCHA validation failed",
+      "error": "Error processing login. Please try again later.",
+      "success": "Login successful!"
+    },
+    "locale": {
+      "invalidLocale": "Invalid locale",
+      "unauthorized": "Not authenticated",
+      "invalidToken": "Invalid or expired token",
+      "error": "Error updating language"
+    },
+    "suggestion": {
+      "unauthorized": "Not authenticated. Please sign in to suggest a course.",
+      "invalidToken": "Invalid or expired token",
+      "missingFields": "Required fields missing",
+      "recaptchaRequired": "reCAPTCHA not provided",
+      "recaptchaFailed": "reCAPTCHA verification failed. Please try again.",
+      "invalidUrl": "Invalid YouTube URL",
+      "error": "Error processing suggestion. Please try again later.",
+      "success": "Suggestion received successfully!"
+    }
+  }
+}

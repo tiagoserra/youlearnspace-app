@@ -1,0 +1,209 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "saving": "Salvando...",
+    "submit": "Enviar",
+    "submitting": "Enviando..."
+  },
+  "auth": {
+    "login": "Entrar",
+    "loginTitle": "Entrar",
+    "loginDescription": "Faça login para acessar sua conta",
+    "register": "Cadastrar",
+    "registerTitle": "Criar Conta",
+    "registerDescription": "Preencha os campos abaixo para se cadastrar",
+    "logout": "Sair",
+    "email": "Email",
+    "emailPlaceholder": "seu@email.com",
+    "password": "Senha",
+    "passwordPlaceholder": "Sua senha",
+    "confirmPassword": "Confirmar Senha",
+    "confirmPasswordPlaceholder": "Digite a senha novamente",
+    "name": "Nome",
+    "namePlaceholder": "Seu nome completo",
+    "passwordMin": "Mínimo 8 caracteres",
+    "passwordMismatch": "As senhas não coincidem",
+    "recaptchaRequired": "Por favor, complete o reCAPTCHA",
+    "loginError": "Erro ao fazer login",
+    "registerError": "Erro ao cadastrar",
+    "registerSuccess": "Cadastro realizado com sucesso! Redirecionando para o login...",
+    "noAccount": "Não tem uma conta?",
+    "hasAccount": "Já tem uma conta?",
+    "loginLink": "Fazer login",
+    "registerLink": "Cadastre-se",
+    "language": "Idioma"
+  },
+  "nav": {
+    "home": "Início",
+    "history": "Histórico",
+    "liked": "Cursos Curtidos",
+    "about": "Sobre",
+    "suggest": "Sugerir Curso",
+    "profile": "Perfil",
+    "search": "Buscar cursos...",
+    "userMenu": "Menu do usuário",
+    "hello": "Olá, {name}"
+  },
+  "theme": {
+    "light": "Modo Claro",
+    "dark": "Modo Escuro"
+  },
+  "course": {
+    "inProgress": "Em Andamento",
+    "completed": "Concluído",
+    "like": "Curtir",
+    "liked": "Curtido",
+    "likeCourse": "Curtir curso",
+    "unlikeCourse": "Descurtir curso",
+    "loginToLike": "Faça login para curtir este curso",
+    "reportProblem": "Curso com problema",
+    "reportProblemTitle": "Relatar Problema",
+    "reportProblemDescription": "Por favor, descreva o problema.",
+    "reportProblemPlaceholder": "Descreva detalhadamente o problema encontrado neste curso...",
+    "reportProblemSuccess": "Problema reportado com sucesso! Obrigado pelo feedback.",
+    "reportProblemError": "Erro ao enviar problema",
+    "recaptchaNotConfigured": "Erro de configuração: reCAPTCHA não configurado.",
+    "descriptionMaxLength": "A descrição não pode ter mais de {max} caracteres.",
+    "characterCount": "{count} / {max}"
+  },
+  "home": {
+    "noCoursesFound": "Nenhum curso encontrado",
+    "noCoursesWithSearch": "Não encontramos cursos com o termo \"{query}\"",
+    "noCoursesInCategory": "Não há cursos na categoria \"{category}\""
+  },
+  "about": {
+    "title": "Sobre o YouLearnSpace",
+    "slogan": "Seja o Protagonista do Seu Futuro",
+    "missionTitle": "Nossa Missão",
+    "missionText": "Democratizar o acesso à educação de qualidade através da curadoria de cursos gratuitos do YouTube...",
+    "howItWorksTitle": "Como Funciona",
+    "step1Title": "Explore",
+    "step1Description": "Navegue por nossa curadoria...",
+    "step2Title": "Escolha",
+    "step2Description": "Encontre o curso perfeito...",
+    "step3Title": "Aprenda",
+    "step3Description": "Assista aos cursos gratuitamente...",
+    "step4Title": "Compartilhe",
+    "step4Description": "Encontrou um curso incrível?...",
+    "whyTitle": "Por Que YouLearnSpace?",
+    "feature1Title": "100% Gratuito:",
+    "feature1Text": "Todos os cursos são completamente gratuitos...",
+    "feature2Title": "Curadoria Especializada:",
+    "feature2Text": "Selecionamos apenas os melhores cursos...",
+    "feature3Title": "Aprenda no Seu Ritmo:",
+    "feature3Text": "Estude quando e onde quiser...",
+    "feature4Title": "Comunidade Colaborativa:",
+    "feature4Text": "Sugira novos cursos...",
+    "whatWeOfferTitle": "O Que Oferecemos",
+    "offer1": "Cursos de Programação e Desenvolvimento",
+    "offer2": "Tecnologia e Inovação",
+    "offer3": "Design e Criatividade",
+    "offer4": "Negócios e Empreendedorismo",
+    "offer5": "E muito mais..."
+  },
+  "suggest": {
+    "title": "Sugerir um Curso",
+    "subtitle": "Conhece um curso gratuito incrível? Compartilhe conosco!",
+    "loginRequired": "Você precisa estar logado para sugerir um curso.",
+    "loginButton": "Fazer Login",
+    "success": "Sugestão enviada com sucesso! Obrigado pela contribuição.",
+    "courseTitle": "Título do Curso",
+    "youtubeUrl": "URL do YouTube",
+    "youtubeUrlPlaceholder": "https://www.youtube.com/watch?v=...",
+    "category": "Categoria",
+    "categoryPlaceholder": "Selecione...",
+    "description": "Descrição ({min}-{max} caracteres)",
+    "descriptionPlaceholder": "Descreva o curso em detalhes, incluindo o que é ensinado, público-alvo, e por que você o recomenda...",
+    "categories": {
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "mobile": "Mobile",
+      "dataScience": "Data Science",
+      "devops": "DevOps",
+      "design": "Design",
+      "softSkills": "Soft Skills"
+    }
+  },
+  "liked": {
+    "title": "Cursos Curtidos",
+    "empty": "Você ainda não curtiu nenhum curso",
+    "emptyDescription": "Explore nossa biblioteca e marque seus cursos favoritos!",
+    "exploreCourses": "Explorar Cursos"
+  },
+  "history": {
+    "title": "Histórico de Cursos",
+    "empty": "Você ainda não acessou nenhum curso",
+    "emptyDescription": "Comece sua jornada de aprendizado agora!",
+    "exploreCourses": "Explorar Cursos"
+  },
+  "profile": {
+    "title": "Meu Perfil",
+    "accountInfo": "Informações da Conta",
+    "name": "Nome",
+    "email": "Email",
+    "preferences": "Preferências",
+    "language": "Idioma",
+    "save": "Salvar",
+    "saving": "Salvando...",
+    "loading": "Carregando...",
+    "localeSaved": "Idioma atualizado com sucesso!",
+    "localeError": "Erro ao atualizar idioma"
+  },
+  "categories": {
+    "all": "Todas",
+    "frontend": "Front-end",
+    "backend": "Back-end",
+    "mobile": "Mobile",
+    "dataScience": "Data Science",
+    "devops": "DevOps",
+    "design": "Design",
+    "softSkills": "Soft Skills"
+  },
+  "levels": {
+    "beginner": "Iniciante",
+    "intermediate": "Intermediário",
+    "advanced": "Avançado"
+  },
+  "api": {
+    "register": {
+      "allFieldsRequired": "Todos os campos são obrigatórios",
+      "emailInvalid": "Email inválido",
+      "passwordMin": "Senha deve ter entre 8 e 50 caracteres",
+      "passwordMismatch": "As senhas não coincidem",
+      "emailAlreadyExists": "Email já cadastrado",
+      "recaptchaRequired": "Por favor, complete o reCAPTCHA",
+      "recaptchaFailed": "Falha na validação do reCAPTCHA",
+      "nameLength": "Nome deve ter entre 3 e 100 caracteres",
+      "error": "Erro ao processar cadastro. Tente novamente mais tarde.",
+      "success": "Cadastro realizado com sucesso!"
+    },
+    "login": {
+      "fieldsRequired": "Email e senha são obrigatórios",
+      "invalidCredentials": "Email ou senha incorretos",
+      "recaptchaRequired": "Por favor, complete o reCAPTCHA",
+      "recaptchaFailed": "Falha na validação do reCAPTCHA",
+      "error": "Erro ao processar login. Tente novamente mais tarde.",
+      "success": "Login realizado com sucesso!"
+    },
+    "locale": {
+      "invalidLocale": "Locale inválido",
+      "unauthorized": "Não autenticado",
+      "invalidToken": "Token inválido ou expirado",
+      "error": "Erro ao atualizar idioma"
+    },
+    "suggestion": {
+      "unauthorized": "Não autenticado. Faça login para sugerir um curso.",
+      "invalidToken": "Token inválido ou expirado",
+      "missingFields": "Campos obrigatórios faltando",
+      "recaptchaRequired": "reCAPTCHA não fornecido",
+      "recaptchaFailed": "Verificação reCAPTCHA falhou. Tente novamente.",
+      "invalidUrl": "URL do YouTube inválida",
+      "error": "Erro ao processar sugestão. Tente novamente mais tarde.",
+      "success": "Sugestão recebida com sucesso!"
+    }
+  }
+}

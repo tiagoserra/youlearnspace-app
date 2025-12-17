@@ -1,0 +1,33 @@
+---
+id: bYF798YJIFY
+title: "Distributed Locking - Quando usar e como implementar em .NET"
+thumb: https://img.youtube.com/vi/bYF798YJIFY/maxresdefault.jpg
+canal: "André Secco"
+data: "2025-11-03"
+duracao: "40 minutos"
+nivel: "Avançado"
+categoria: "Back-end"
+tags: [".NET", "C#", "Redis", "Sistemas Distribuídos", "Azure Blob Storage", "Arquitetura", "Concorrência"]
+descricao: "Aprenda o conceito de Distributed Locking e veja implementações práticas em .NET utilizando Redis (nativo e bibliotecas) e Azure Blob Storage para gerenciar concorrência em sistemas distribuídos."
+url: "https://www.youtube.com/watch?v=bYF798YJIFY"
+dataCriacao: 2025-11-20
+---
+Neste vídeo, André Secco aborda um padrão fundamental para sistemas distribuídos: o Distributed Locking (Bloqueio Distribuído). O conteúdo começa explicando a teoria por trás do mecanismo — como controlar o acesso concorrente a recursos compartilhados entre múltiplas instâncias de uma aplicação. Em seguida, parte para a prática, demonstrando diferentes formas de implementação no ecossistema .NET, desde o uso "cru" do Redis até bibliotecas especializadas como RedLock.net e DistributedLock, e até uma alternativa usando Azure Blob Storage.
+
+## O que você vai aprender
+- **Conceitos Fundamentais:** O que é Lock Distribuído, para que serve e como funciona o fluxo de adquirir, renovar (refresh) e liberar um lock.
+- **Implementação Manual com Redis:** Como criar uma estratégia de lock usando apenas o `StackExchange.Redis`.
+- **RedLock.net:** Análise e implementação utilizando a biblioteca baseada no algoritmo Redlock.
+- **Biblioteca DistributedLock:** Uso da biblioteca mais moderna e recomendada (`DistributedLock`) com suporte a diversos providers.
+- **Auto-refresh:** Como as bibliotecas lidam automaticamente com a extensão do tempo do lock se o processamento demorar mais que o previsto.
+- **Azure Blob Storage como Lock:** Uma alternativa de implementação usando *Blob Leases* para cenários onde o Redis não está disponível ou para processos de longa duração.
+- **Comparativo:** Prós e contras das diferentes abordagens e pacotes.
+
+## Pré-requisitos
+- Conhecimento sólido em C# e .NET.
+- Entendimento básico de sistemas distribuídos e problemas de concorrência.
+- Familiaridade com Redis e Docker (para rodar o ambiente local).
+- Noções de Azure (para a parte de Blob Storage).
+
+## Para quem é este curso
+Desenvolvedores Backend e Arquitetos de Software que trabalham com microsserviços ou sistemas distribuídos e precisam garantir a consistência de dados ao acessar recursos compartilhados em ambientes de alta concorrência.

@@ -1,0 +1,85 @@
+.container {
+  position: sticky;
+  top: var(--header-height);
+  background-color: var(--bg-primary);
+  padding: 12px 24px 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 80;
+  margin: -24px -24px 24px -24px;
+}
+
+.chipsWrapper {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  cursor: grab;
+  user-select: none;
+}
+
+.chipsWrapper:active {
+  cursor: grabbing;
+}
+
+html.dark-mode .chipsWrapper {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.chipsWrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.chipsWrapper::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 4px;
+}
+
+.chipsWrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+html.dark-mode .chipsWrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.chipsWrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+html.dark-mode .chipsWrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.chip {
+  flex-shrink: 0;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.chip:hover {
+  background-color: var(--bg-hover);
+}
+
+.chip.active {
+  background-color: var(--bg-active);
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 12px 16px;
+    margin: -16px -16px 16px -16px;
+  }
+}

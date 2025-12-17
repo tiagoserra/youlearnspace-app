@@ -1,0 +1,209 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "submit": "Enviar",
+    "submitting": "Enviando..."
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "loginTitle": "Iniciar Sesión",
+    "loginDescription": "Inicia sesión para acceder a tu cuenta",
+    "register": "Registrarse",
+    "registerTitle": "Crear Cuenta",
+    "registerDescription": "Completa los campos a continuación para registrarte",
+    "logout": "Cerrar Sesión",
+    "email": "Correo",
+    "emailPlaceholder": "tu@correo.com",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Tu contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "confirmPasswordPlaceholder": "Ingresa la contraseña nuevamente",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre completo",
+    "passwordMin": "Mínimo 8 caracteres",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "recaptchaRequired": "Por favor, completa el reCAPTCHA",
+    "loginError": "Error al iniciar sesión",
+    "registerError": "Error al registrarse",
+    "registerSuccess": "¡Registro exitoso! Redirigiendo al inicio de sesión...",
+    "noAccount": "¿No tienes una cuenta?",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "loginLink": "Iniciar sesión",
+    "registerLink": "Regístrate",
+    "language": "Idioma"
+  },
+  "nav": {
+    "home": "Inicio",
+    "history": "Historial",
+    "liked": "Cursos Favoritos",
+    "about": "Acerca de",
+    "suggest": "Sugerir Curso",
+    "profile": "Perfil",
+    "search": "Buscar cursos...",
+    "userMenu": "Menú de usuario",
+    "hello": "Hola, {name}"
+  },
+  "theme": {
+    "light": "Modo Claro",
+    "dark": "Modo Oscuro"
+  },
+  "course": {
+    "inProgress": "En Progreso",
+    "completed": "Completado",
+    "like": "Me Gusta",
+    "liked": "Te Gusta",
+    "likeCourse": "Dar me gusta al curso",
+    "unlikeCourse": "Quitar me gusta del curso",
+    "loginToLike": "Inicia sesión para dar me gusta a este curso",
+    "reportProblem": "Reportar Problema",
+    "reportProblemTitle": "Reportar Problema",
+    "reportProblemDescription": "Por favor, describe el problema.",
+    "reportProblemPlaceholder": "Describe detalladamente el problema encontrado en este curso...",
+    "reportProblemSuccess": "¡Problema reportado con éxito! Gracias por tu comentario.",
+    "reportProblemError": "Error al enviar el problema",
+    "recaptchaNotConfigured": "Error de configuración: reCAPTCHA no configurado.",
+    "descriptionMaxLength": "La descripción no puede superar los {max} caracteres.",
+    "characterCount": "{count} / {max}"
+  },
+  "home": {
+    "noCoursesFound": "No se encontraron cursos",
+    "noCoursesWithSearch": "No encontramos cursos con el término \"{query}\"",
+    "noCoursesInCategory": "No hay cursos en la categoría \"{category}\""
+  },
+  "about": {
+    "title": "Acerca de YouLearnSpace",
+    "slogan": "Sé el Protagonista de Tu Futuro",
+    "missionTitle": "Nuestra Misión",
+    "missionText": "Democratizar el acceso a educación de calidad a través de cursos gratuitos de YouTube...",
+    "howItWorksTitle": "Cómo Funciona",
+    "step1Title": "Explora",
+    "step1Description": "Navega por nuestra colección...",
+    "step2Title": "Elige",
+    "step2Description": "Encuentra el curso perfecto...",
+    "step3Title": "Aprende",
+    "step3Description": "Mira cursos gratis...",
+    "step4Title": "Comparte",
+    "step4Description": "¿Encontraste un curso increíble?...",
+    "whyTitle": "¿Por Qué YouLearnSpace?",
+    "feature1Title": "100% Gratis:",
+    "feature1Text": "Todos los cursos son completamente gratuitos...",
+    "feature2Title": "Curación Experta:",
+    "feature2Text": "Seleccionamos solo los mejores cursos...",
+    "feature3Title": "Aprende a Tu Ritmo:",
+    "feature3Text": "Estudia cuando y donde quieras...",
+    "feature4Title": "Comunidad Colaborativa:",
+    "feature4Text": "Sugiere nuevos cursos...",
+    "whatWeOfferTitle": "Lo Que Ofrecemos",
+    "offer1": "Cursos de Programación y Desarrollo",
+    "offer2": "Tecnología e Innovación",
+    "offer3": "Diseño y Creatividad",
+    "offer4": "Negocios y Emprendimiento",
+    "offer5": "Y mucho más..."
+  },
+  "suggest": {
+    "title": "Sugerir un Curso",
+    "subtitle": "¿Conoces un curso gratuito increíble? ¡Compártelo con nosotros!",
+    "loginRequired": "Debes iniciar sesión para sugerir un curso.",
+    "loginButton": "Iniciar Sesión",
+    "success": "¡Sugerencia enviada con éxito! Gracias por tu contribución.",
+    "courseTitle": "Título del Curso",
+    "youtubeUrl": "URL de YouTube",
+    "youtubeUrlPlaceholder": "https://www.youtube.com/watch?v=...",
+    "category": "Categoría",
+    "categoryPlaceholder": "Selecciona...",
+    "description": "Descripción ({min}-{max} caracteres)",
+    "descriptionPlaceholder": "Describe el curso en detalle, incluyendo qué se enseña, público objetivo y por qué lo recomiendas...",
+    "categories": {
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "mobile": "Mobile",
+      "dataScience": "Data Science",
+      "devops": "DevOps",
+      "design": "Diseño",
+      "softSkills": "Habilidades Blandas"
+    }
+  },
+  "liked": {
+    "title": "Cursos Favoritos",
+    "empty": "Aún no has dado me gusta a ningún curso",
+    "emptyDescription": "¡Explora nuestra biblioteca y marca tus cursos favoritos!",
+    "exploreCourses": "Explorar Cursos"
+  },
+  "history": {
+    "title": "Historial de Cursos",
+    "empty": "Aún no has accedido a ningún curso",
+    "emptyDescription": "¡Comienza tu viaje de aprendizaje ahora!",
+    "exploreCourses": "Explorar Cursos"
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "accountInfo": "Información de la Cuenta",
+    "name": "Nombre",
+    "email": "Correo",
+    "preferences": "Preferencias",
+    "language": "Idioma",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "loading": "Cargando...",
+    "localeSaved": "¡Idioma actualizado con éxito!",
+    "localeError": "Error al actualizar idioma"
+  },
+  "categories": {
+    "all": "Todas",
+    "frontend": "Front-end",
+    "backend": "Back-end",
+    "mobile": "Mobile",
+    "dataScience": "Data Science",
+    "devops": "DevOps",
+    "design": "Diseño",
+    "softSkills": "Habilidades Blandas"
+  },
+  "levels": {
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado"
+  },
+  "api": {
+    "register": {
+      "allFieldsRequired": "Todos los campos son obligatorios",
+      "emailInvalid": "Correo inválido",
+      "passwordMin": "La contraseña debe tener entre 8 y 50 caracteres",
+      "passwordMismatch": "Las contraseñas no coinciden",
+      "emailAlreadyExists": "Correo ya registrado",
+      "recaptchaRequired": "Por favor, completa el reCAPTCHA",
+      "recaptchaFailed": "Falló la validación del reCAPTCHA",
+      "nameLength": "El nombre debe tener entre 3 y 100 caracteres",
+      "error": "Error al procesar el registro. Inténtalo de nuevo más tarde.",
+      "success": "¡Registro exitoso!"
+    },
+    "login": {
+      "fieldsRequired": "Correo y contraseña son obligatorios",
+      "invalidCredentials": "Correo o contraseña incorrectos",
+      "recaptchaRequired": "Por favor, completa el reCAPTCHA",
+      "recaptchaFailed": "Falló la validación del reCAPTCHA",
+      "error": "Error al procesar el inicio de sesión. Inténtalo de nuevo más tarde.",
+      "success": "¡Inicio de sesión exitoso!"
+    },
+    "locale": {
+      "invalidLocale": "Idioma inválido",
+      "unauthorized": "No autenticado",
+      "invalidToken": "Token inválido o expirado",
+      "error": "Error al actualizar idioma"
+    },
+    "suggestion": {
+      "unauthorized": "No autenticado. Inicia sesión para sugerir un curso.",
+      "invalidToken": "Token inválido o expirado",
+      "missingFields": "Faltan campos obligatorios",
+      "recaptchaRequired": "reCAPTCHA no proporcionado",
+      "recaptchaFailed": "Verificación de reCAPTCHA falló. Inténtalo de nuevo.",
+      "invalidUrl": "URL de YouTube inválida",
+      "error": "Error al procesar la sugerencia. Inténtalo de nuevo más tarde.",
+      "success": "¡Sugerencia recibida con éxito!"
+    }
+  }
+}
