@@ -21,13 +21,38 @@ Este guia cobre **tudo** que você precisa para fazer deploy do YouLearnSpace na
 
 ## 1. Preparação do Projeto
 
-### 1.1 Verificar Build Local
+### 1.1 Configurar Prisma para Deploy (CRÍTICO)
+
+O Prisma precisa gerar o client antes do build. Adicione script `postinstall` no `package.json`:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx,css}\"",
+    "postinstall": "prisma generate"  // ← ADICIONE ESTA LINHA
+  }
+}
+```
+
+**Por quê?** Na Vercel, o build roda `npm install` → `npm run build`. Sem o `postinstall`, o Prisma Client não é gerado e o build falha com erro:
+```
+Error: Cannot find module '@prisma/client'
+```
+
+### 1.2 Verificar Build Local
 
 Antes de fazer deploy, certifique-se que o projeto builda sem erros:
 
 ```bash
-# Instalar dependências
+# Instalar dependências (vai rodar postinstall automaticamente)
 npm install
+
+# Gerar Prisma Client (já rodou no postinstall, mas confirme)
+npx prisma generate
 
 # Testar build de produção
 npm run build
@@ -38,7 +63,7 @@ npm run build
 
 Se houver erros, corrija-os antes de prosseguir.
 
-### 1.2 Commit e Push
+### 1.3 Commit e Push
 
 ```bash
 # Commit todas as alterações
@@ -374,6 +399,38 @@ Se você tem um domínio próprio (ex: `youlearnspace.com.br`):
 
 ### Problemas Comuns e Soluções
 
+#### ❌ Erro: "Cannot find module '@prisma/client'" no Build
+
+**Causa:** Prisma Client não foi gerado antes do build.
+
+**Erro completo:**
+```
+Error: Cannot find module '@prisma/client'
+  > 1 | import { PrismaClient } from '@prisma/client'
+      |          ^
+```
+
+**Solução:**
+1. Adicione script `postinstall` no `package.json`:
+   ```json
+   "scripts": {
+     "postinstall": "prisma generate"
+   }
+   ```
+
+2. Commit e push:
+   ```bash
+   git add package.json
+   git commit -m "Add postinstall script for Prisma"
+   git push
+   ```
+
+3. Vercel vai fazer redeploy automaticamente e deve funcionar!
+
+**Alternativa (se não quiser usar postinstall):**
+- Configure Build Command na Vercel: `prisma generate && next build`
+- Settings → General → Build & Development Settings → Build Command
+
 #### ❌ Erro: "PrismaClientInitializationError"
 
 **Causa:** Banco de dados não acessível ou migrations não rodadas.
@@ -561,6 +618,7 @@ Acesse métricas em tempo real:
 Use este checklist para garantir que tudo está configurado:
 
 ### Pré-Deploy
+- [ ] Script `postinstall: "prisma generate"` adicionado no `package.json`
 - [ ] `npm run build` roda sem erros localmente
 - [ ] `.env.local.example` atualizado com todas as variáveis
 - [ ] Todos os cursos MDX estão na pasta `data/cursos/`
