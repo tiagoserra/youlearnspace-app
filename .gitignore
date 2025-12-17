@@ -1,0 +1,118 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.pnp.*
+
+# testing
+/coverage
+*.lcov
+.nyc_output
+
+# next.js
+/.next/
+/out/
+.next
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+*.pem
+ehthumbs.db
+Thumbs.db
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# local env files
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# OS
+Thumbs.db
+
+# Prisma
+/lib/generated/prisma
+prisma/migrations/**/*.sql
+!prisma/migrations/**/migration.sql
+
+# Database files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Optional npm cache
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn
+.yarn-integrity
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+.local
+
+# Backup files
+*.bak
+*.backup
+
+# Lock files (opcional - escolha apenas um)
+# Descomente se quiser ignorar lockfiles alternativos
+# yarn.lock
+# pnpm-lock.yaml
+# package-lock.json
+
+# PDFs
+*.pdf
+!entrega.pdf
+!apresentacao.pdf
+!projeto.pdf
