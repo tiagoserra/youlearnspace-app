@@ -19,6 +19,7 @@
     "@prisma/adapter-pg": "^7.1.0",
     "@prisma/client": "^7.1.0",
     "@reduxjs/toolkit": "^2.11.2",
+    "@vercel/analytics": "^1.6.1",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "graphql": "^16.12.0",

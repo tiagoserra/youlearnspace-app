@@ -9,7 +9,7 @@ import YouTubeLayout from '@/components/layout/YouTubeLayout'
 import CourseCard from '@/components/course/CourseCard'
 import styles from './page.module.css'
 
-const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || 'http://localhost:3000/api/graphql'
+const GRAPHQL_ENDPOINT = '/api/graphql'
 
 export default function CurtidosPage() {
   const pathname = usePathname()

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import { Analytics } from '@vercel/analytics/react'
 import { DarkModeProvider } from '@/context/DarkModeContext'
 import { ReduxProvider } from '@/lib/redux/ReduxProvider'
 import { ToastProvider } from '@/context/ToastContext'
@@ -82,6 +83,7 @@ export default async function RootLayout({
             </DarkModeProvider>
           </ReduxProvider>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   )
